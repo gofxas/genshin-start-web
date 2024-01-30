@@ -1,0 +1,21 @@
+{
+  "name": "启动？",
+  "short_name": "启动？",
+  "start_url": "/",
+  "theme_color": "#4374A5",
+  "background_color": "#4374A5",
+  "display": "standalone",
+  "orientation": "natural",
+  "icons": [
+    {
+      "src": "./logo.192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./logo.512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

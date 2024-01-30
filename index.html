@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>启动？</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="manifest" href="./site.webmanifest">
+</head>
+<style>
+    body {
+        margin: 0;
+        background-color: #000;
+    }
+
+    .app {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #vdo {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .play {
+        color: #fff;
+        cursor: pointer;
+        text-shadow: 1px 1px 2px 1px #fff;
+
+
+    }
+
+    .play:hover {
+        text-shadow: 5px 4px 9px #f3c4c4;
+    }
+</style>
+
+<body>
+    <div class="app">
+        <video hidden id="vdo" src="./genshin.mp4"></video>
+        <div class="play" onclick="genshinStart()">启动？</div>
+    </div>
+</body>
+<script>
+    var vdo = document.querySelector("#vdo");
+    var app = document.querySelector(".app");
+    app.onfullscreenchange = handleFullscreenChange;
+    function handleFullscreenChange(event) {
+        let elem = event.target;
+        let isFullscreen = document.fullscreenElement === elem;
+        if (isFullscreen) {
+            vdo.hidden = false
+            vdo.currentTime = 0;
+            vdo.play()
+        } else {
+            vdo.hidden = true
+            vdo.pause()
+        }
+    }
+    function genshinStart() {
+        app.requestFullscreen()
+    }
+</script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('./serviceWorker.js').then(function (registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                window.$registion = true;
+            }, function (err) {
+                console.error('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+</script>
+
+</html>
